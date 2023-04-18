@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome</title>
+        <link rel="stylesheet" href="/css/welcome.css">
+    </head>
+    <body class="body">
+        <h1>Welcome to the app! </h1>
+        <h1>welcome <%=user.name%></h1>
+        
+        <div>
+        <form action="/welcome" method="post">
+                <input type="text" name="content" placeholder="write your blog"> 
+                <input type="hidden" name=user value="<%=user._id%>"><br><br>
+                <input type="submit" value="create post"><br><br><br>
+        </form>
+    </div>
+
+    <div>
+
+        <% for(let i=allPost.length-1;i>=0;i--){ %>
+            
+            
+
+            <div>
+                
+                <% if (user.equals(allPost[i].user)){%>
+                    
+                    <form action="/deletePost" method="post">
+                    <%=allPost[i].content%> <br>
+                    <%=allPost[i]._id%>
+                    <input type="hidden" value="<%= allPost[i]._id%>" name="blog_id"> <br>
+                    <input type="submit" value="delete"> <br><br>
+
+
+                    </form>
+                    
+                <%}%>
+                
+
+                
+
+               
+
+            </div>
+
+        <%}%>
+    </div>
+    <div>
+        
+        want to logout?
+        <form action="/signout" method="POST">
+            <input type="hidden" value="<%= user.email %>" name="userEmail">
+            <input type="submit" value="Sign Out">
+        </form>
+    </div>
+    </body>
+</html>
